@@ -62,6 +62,7 @@
     <Build Include="Points.sql" />
     <Build Include="MatchPredictions.sql" />
     <Build Include="Fixtures.sql" />
+    <None Include="CreateFixtures.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Euro2016DB.publish.xml" />
