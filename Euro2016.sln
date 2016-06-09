@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Euro2016", "Euro2016\Euro2016.csproj", "{CAC12F55-716C-4351-B4D4-1CA82A31E205}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Euro2016DB", "Euro2016DB\Euro2016DB.sqlproj", "{D512FA86-FEA8-4496-B347-E0F903A453FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,12 @@ Global
 		{CAC12F55-716C-4351-B4D4-1CA82A31E205}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAC12F55-716C-4351-B4D4-1CA82A31E205}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAC12F55-716C-4351-B4D4-1CA82A31E205}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D512FA86-FEA8-4496-B347-E0F903A453FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D512FA86-FEA8-4496-B347-E0F903A453FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D512FA86-FEA8-4496-B347-E0F903A453FB}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D512FA86-FEA8-4496-B347-E0F903A453FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D512FA86-FEA8-4496-B347-E0F903A453FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D512FA86-FEA8-4496-B347-E0F903A453FB}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

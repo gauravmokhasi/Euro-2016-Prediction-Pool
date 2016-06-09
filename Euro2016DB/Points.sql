@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Points]
+(
+	[UserId] INT NOT NULL IDENTITY(1,1),
+	[UserName] NVARCHAR(30) NOT NULL PRIMARY KEY,
+	[Points] INT NOT NULL DEFAULT 0
+)
