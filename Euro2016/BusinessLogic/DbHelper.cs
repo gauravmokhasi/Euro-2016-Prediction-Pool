@@ -5,12 +5,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
-using System.Linq;
-using System.Web;
 
 namespace Euro2016.BusinessLogic
 {
-    public class DbHelper
+    public static class DbHelper
     {
         private static readonly string ConnectionString = ConfigurationManager.ConnectionStrings["ConnectionString"]?.ConnectionString;
 
@@ -20,6 +18,7 @@ namespace Euro2016.BusinessLogic
             {
                 AddPlayerToPointsTable(prediction.UserName);
             }
+
             string sqlQuery = "INSERT INTO MatchPredictions(UserName, MatchId, HomeTeamPredictedScore, AwayTeamPredictedScore) VALUES (" + prediction.UserName + ", " + prediction.MatchId + ", " + prediction.HomeTeamPredictedScore + ", " + prediction.AwayTeamPredictedScore + ")";
             WriteToDb(sqlQuery);
         }
@@ -27,20 +26,7 @@ namespace Euro2016.BusinessLogic
         private static bool CheckPlayerInPointsTable(string userName)
         {
             List<Player> players = GetAllPlayers();
-            int count = 0;
-            foreach (Player player in players)
-            {
-                if (player.UserName == userName)
-                {
-                    break;
-                }
-                count += 1;
-            }
-            if (count == players.Count)
-            {
-                return false;
-            }
-            return true;
+            return players.Exists(x => x.UserName == userName);
         }
 
         private static void AddPlayerToPointsTable(string userName)
