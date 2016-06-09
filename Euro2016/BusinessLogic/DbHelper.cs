@@ -14,13 +14,13 @@ namespace Euro2016.BusinessLogic
     {
         private static readonly string ConnectionString = ConfigurationManager.ConnectionStrings["ConnectionString"]?.ConnectionString;
 
-        public static void RecordPredictionReceived(string userName, int matchId, int homeTeamScore, int awayTeamScore)
+        public static void RecordPredictionReceived(Prediction prediction)
         {
-            if (!CheckPlayerInPointsTable(userName))
+            if (!CheckPlayerInPointsTable(prediction.UserName))
             {
-                AddPlayerToPointsTable(userName);
+                AddPlayerToPointsTable(prediction.UserName);
             }
-            string sqlQuery = "INSERT INTO MatchPredictions(UserName, MatchId, HomeTeamScore, AwayTeamScore) VALUES (" + userName + ", " + matchId + ", " + homeTeamScore + ", " + awayTeamScore + ")";
+            string sqlQuery = "INSERT INTO MatchPredictions(UserName, MatchId, HomeTeamPredictedScore, AwayTeamPredictedScore) VALUES (" + prediction.UserName + ", " + prediction.MatchId + ", " + prediction.HomeTeamPredictedScore + ", " + prediction.AwayTeamPredictedScore + ")";
             WriteToDb(sqlQuery);
         }
 

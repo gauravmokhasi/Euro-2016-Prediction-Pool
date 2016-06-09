@@ -163,6 +163,7 @@
     </Compile>
     <Compile Include="Models\Fixture.cs" />
     <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\Prediction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
