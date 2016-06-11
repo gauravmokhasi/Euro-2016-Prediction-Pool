@@ -15,18 +15,20 @@
             See upcoming fixtures and the scores for games that have already been played.
             Also give your predictions by clicking on the individual match links.
         </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Go to fixtures &raquo;</a></p>
+        <p class="btn btn-default">@Html.ActionLink("Go to fixtures", "Fixtures", "Home")</p>
     </div>
     <div class="col-md-4">
         <h2>Leaderboard</h2>
         <p>
             See how you are faring against your friends and rivals.
             The leaderboard is updated daily.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Go to leaderboard &raquo;</a></p>
+        <p class="btn btn-default">@Html.ActionLink("Go to leaderboard", "Leaderboard", "Home")</p>
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <h2>Predictions</h2>
+        <p>
+            See all the scores that you have predicted so far.
+        </p>
+        <p class="btn btn-default">@Html.ActionLink("Go to predictions", "Predictions", "Home")</p>
     </div>
 </div>

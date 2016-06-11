@@ -56,10 +56,10 @@ namespace Euro2016.BusinessLogic
             return fixtures;
         }
 
-        private static List<Player> GetAllPlayers()
+        public static List<Player> GetAllPlayers()
         {
             List<Player> players = new List<Player>();
-            using (IDataReader reader = GetIDataReader("SELECT * FROM Points"))
+            using (IDataReader reader = GetIDataReader("SELECT * FROM Points ORDER BY Points DESC"))
             {
                 while (reader.Read())
                 {
@@ -73,7 +73,7 @@ namespace Euro2016.BusinessLogic
             return players;
         }
 
-        public static int WriteToDb(string sqlQuery)
+        private static int WriteToDb(string sqlQuery)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace Euro2016.BusinessLogic
             }
         }
 
-        public static IDataReader GetIDataReader(string sqlQuery)
+        private static IDataReader GetIDataReader(string sqlQuery)
         {
             SqlDatabase database = new SqlDatabase(ConnectionString);
             DbCommand command = database.GetSqlStringCommand(sqlQuery);

@@ -1,0 +1,34 @@
+﻿@model List<Euro2016.Models.Fixture>
+
+@{
+    ViewBag.Title = "Fixtures";
+}
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Click on "Predict Score" to give your predictions for the match and enter the tournament.</p>
+
+@{
+    if (!Model.Any())
+    {
+        <div class="container">
+            <p class="lead">No fixtures to be displayed at the moment.</p>
+        </div>
+    }
+    else
+    {
+        var grid = new WebGrid(Model, canPage: true, rowsPerPage: 12);
+        @grid.GetHtml(
+      htmlAttributes: new { id = "FixtureTable" },
+      columns: grid.Columns(
+          grid.Column("MatchDate", header: "Match Date"),
+          grid.Column("HomeTeam", header: "Home Team"),
+          grid.Column("HomeTeamScore", header: "Home Team Score"),
+          grid.Column("AwayTeamScore", header: "Away Team Score"),
+          grid.Column("AwayTeam", header: "Away Team")//,
+                                                      //          grid.Column(format: (item) => @Html.ActionLink("Predict Score", "Predict", new { id = (int)item.MatchId }, new { @class = "btn btn-xs btn-default" }))
+         ),
+         tableStyle: "table table-striped"
+      )
+    }
+}

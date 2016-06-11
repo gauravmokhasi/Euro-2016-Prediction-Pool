@@ -22,11 +22,11 @@ namespace Euro2016.Controllers
             return View(fixtures);
         }
 
-        public ActionResult Contact()
+        public ActionResult Leaderboard()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            ViewBag.Message = "Current Leaderboard based on player predictions";
+            List<Player> players = DbHelper.GetAllPlayers();
+            return View(players);
         }
     }
 }
