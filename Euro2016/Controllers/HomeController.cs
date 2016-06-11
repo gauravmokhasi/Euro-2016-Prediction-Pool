@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Euro2016.BusinessLogic;
+using Euro2016.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,11 +15,11 @@ namespace Euro2016.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Fixtures()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            ViewBag.Message = "List of fixtures for Euro 2016";
+            List<Fixture> fixtures = DbHelper.GetAllFixtures();
+            return View(fixtures);
         }
 
         public ActionResult Contact()
