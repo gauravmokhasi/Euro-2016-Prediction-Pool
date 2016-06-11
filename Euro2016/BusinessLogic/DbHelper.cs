@@ -73,6 +73,27 @@ namespace Euro2016.BusinessLogic
             return players;
         }
 
+        public static List<Prediction> GetPredictionHistory(string username)
+        {
+            List<Prediction> predictions = new List<Prediction>();
+            using (IDataReader reader = GetIDataReader("SELECT UserName, HomeTeamPredictedScore, AwayTeamPredictedScore, HomeTeam, AwayTeam, MatchDate FROM MatchPredictions MP, Fixtures F WHERE MP.MatchId = F.MatchId AND UserName = '" + username + "'"))
+            {
+                while (reader.Read())
+                {
+                    predictions.Add(new Prediction
+                    {
+                        UserName = (string)reader["UserName"],
+                        HomeTeamPredictedScore = (int)reader["HomeTeamPredictedScore"],
+                        AwayTeamPredictedScore = (int)reader["AwayTeamPredictedScore"],
+                        HomeTeam = (string)reader["HomeTeam"],
+                        AwayTeam = (string)reader["AwayTeam"],
+                        MatchDate = ((DateTime)reader["MatchDate"]).Date
+                    });
+                }
+            }
+            return predictions;
+        }
+
         private static int WriteToDb(string sqlQuery)
         {
             try

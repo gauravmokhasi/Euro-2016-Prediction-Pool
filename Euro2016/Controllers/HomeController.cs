@@ -28,5 +28,12 @@ namespace Euro2016.Controllers
             List<Player> players = DbHelper.GetAllPlayers();
             return View(players);
         }
+
+        public ActionResult Predictions()
+        {
+            ViewBag.Message = "List of all predictions you have made so far";
+            List<Prediction> predictions = DbHelper.GetPredictionHistory(@User.Identity.Name);
+            return View(predictions);
+        }
     }
 }
