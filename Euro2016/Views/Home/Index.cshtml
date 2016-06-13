@@ -5,7 +5,7 @@
 <div class="jumbotron">
     <h1>Euro 2016 Prediction Pool</h1>
     <p class="lead">The Euro 2016 Prediction Pool lets you see fixtures and scores, as well as predict scores and compete against your friends in the leaderboard.</p>
-    <p class="btn btn-primary btn-lg">@Html.ActionLink("Go to fixtures", "Fixtures", "Home")</p>
+    <p class="btn btn-primary btn-lg">@Html.ActionLink("See fixtures", "Fixtures", "Home")</p>
 </div>
 
 <div class="row">
@@ -21,7 +21,8 @@
         <h2>Leaderboard</h2>
         <p>
             See how you are faring against your friends and rivals.
-            The leaderboard is updated daily.</p>
+            The leaderboard is updated daily.
+        </p>
         <p class="btn btn-default">@Html.ActionLink("Go to leaderboard", "Leaderboard", "Home")</p>
     </div>
     <div class="col-md-4">
@@ -31,4 +32,16 @@
         </p>
         <p class="btn btn-default">@Html.ActionLink("Go to predictions", "Predictions", "Home")</p>
     </div>
+    @{
+        if (User.Identity.Name.Equals("VISA\\gmokhasi"))
+        {
+            <div class="col-md-4">
+                <h2>Admin Panel</h2>
+                <p>
+                    Update scores for fixtures that have been played.
+                </p>
+                <p class="btn btn-default">@Html.ActionLink("Go update scores", "Fixtures", "Home")</p>
+            </div>
+        }
+    }
 </div>
