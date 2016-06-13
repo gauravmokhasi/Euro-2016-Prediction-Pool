@@ -1,9 +1,6 @@
 ﻿using Euro2016.BusinessLogic;
 using Euro2016.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Euro2016.Controllers
@@ -34,6 +31,14 @@ namespace Euro2016.Controllers
             ViewBag.Message = "List of all predictions you have made so far";
             List<Prediction> predictions = DbHelper.GetPredictionHistory(@User.Identity.Name);
             return View(predictions);
+        }
+
+        [HttpPost]
+        public ActionResult Predict(Prediction prediction)
+        {
+            prediction.UserName = @User.Identity.Name;
+            DbHelper.RecordPredictionReceived(prediction);
+            return RedirectToAction("Predictions");
         }
     }
 }

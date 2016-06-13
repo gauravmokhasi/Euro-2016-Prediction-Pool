@@ -19,7 +19,7 @@ namespace Euro2016.BusinessLogic
                 AddPlayerToPointsTable(prediction.UserName);
             }
 
-            string sqlQuery = "INSERT INTO MatchPredictions(UserName, MatchId, HomeTeamPredictedScore, AwayTeamPredictedScore) VALUES (" + prediction.UserName + ", " + prediction.MatchId + ", " + prediction.HomeTeamPredictedScore + ", " + prediction.AwayTeamPredictedScore + ")";
+            string sqlQuery = "INSERT INTO MatchPredictions(UserName, MatchId, HomeTeamPredictedScore, AwayTeamPredictedScore) VALUES ('" + prediction.UserName + "', " + prediction.MatchId + ", " + prediction.HomeTeamPredictedScore + ", " + prediction.AwayTeamPredictedScore + ")";
             WriteToDb(sqlQuery);
         }
 
