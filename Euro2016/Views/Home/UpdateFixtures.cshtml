@@ -33,6 +33,11 @@
     }
 }
 
+<div class="row" align="center">
+    <button type="button" class="btn btn-primary" id="submitLeaderboard">Update Leaderboard</button>
+    @using (@Html.BeginForm("UpdateLeaderboard", "Home", FormMethod.Post, new { id = "updateLeaderboard" })) { }
+</div>
+
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -64,6 +69,8 @@
         </div>
     </div>
 </div>
+
+
 @section scripts
 {
     <script>
@@ -81,6 +88,9 @@
         })
         $('#submit').click(function () {
             $('#update').submit();
+        });
+        $('#submitLeaderboard').click(function () {
+            $('#updateLeaderboard').submit();
         });
     </script>
 }

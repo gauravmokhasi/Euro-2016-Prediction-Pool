@@ -54,5 +54,12 @@ namespace Euro2016.Controllers
             DbHelper.UpdateScore(fixture);
             return RedirectToAction("UpdateFixtures");
         }
+
+        [HttpPost]
+        public ActionResult UpdateLeaderboard()
+        {
+            DbHelper.UpdateLeaderboard();
+            return RedirectToAction("Leaderboard");
+        }
     }
 }

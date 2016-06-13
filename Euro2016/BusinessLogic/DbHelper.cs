@@ -62,6 +62,45 @@ namespace Euro2016.BusinessLogic
             return fixtures;
         }
 
+        public static void UpdateLeaderboard()
+        {
+            List<Player> players = GetAllPlayers();
+            List<Fixture> fixtures = GetAllFixtures();
+            foreach (Player player in players)
+            {
+                int points = 0;
+                List<Prediction> predictions = GetPredictionHistory(player.UserName);
+                foreach (Fixture fixture in fixtures)
+                {
+                    int pointsIncrement = 0;
+                    if (fixture.MatchDate < DateTime.UtcNow)
+                    {
+                        if(predictions.Exists(x=> x.MatchId == fixture.MatchId))
+                        {
+                            Prediction matchPrediction = predictions.Find(x => x.MatchId == fixture.MatchId);
+                            int actualResult = fixture.HomeTeamScore - fixture.AwayTeamScore;
+                            int predictedResult = matchPrediction.HomeTeamPredictedScore - matchPrediction.AwayTeamPredictedScore;
+                            if (fixture.HomeTeamScore == matchPrediction.HomeTeamPredictedScore && fixture.AwayTeamScore == matchPrediction.AwayTeamPredictedScore)
+                            {
+                                pointsIncrement = 8;
+                            }
+                            else if (actualResult == predictedResult)
+                            {
+                                pointsIncrement = 5;
+                            }
+                            else if (actualResult.CompareTo(0) == predictedResult.CompareTo(0))
+                            {
+                                pointsIncrement = 3;
+                            }
+                        }
+                        points += pointsIncrement;
+                    }
+                }
+                string sqlQuery = "UPDATE Points SET Points = " + points + " WHERE username = '" + player.UserName + "'";
+                WriteToDb(sqlQuery);
+            }
+        }
+
         public static List<Player> GetAllPlayers()
         {
             List<Player> players = new List<Player>();
@@ -82,12 +121,13 @@ namespace Euro2016.BusinessLogic
         public static List<Prediction> GetPredictionHistory(string username)
         {
             List<Prediction> predictions = new List<Prediction>();
-            using (IDataReader reader = GetIDataReader("SELECT UserName, HomeTeamPredictedScore, AwayTeamPredictedScore, HomeTeam, AwayTeam, MatchDate FROM MatchPredictions MP, Fixtures F WHERE MP.MatchId = F.MatchId AND UserName = '" + username + "'"))
+            using (IDataReader reader = GetIDataReader("SELECT MP.MatchId AS MatchId, UserName, HomeTeamPredictedScore, AwayTeamPredictedScore, HomeTeam, AwayTeam, MatchDate FROM MatchPredictions MP, Fixtures F WHERE MP.MatchId = F.MatchId AND UserName = '" + username + "'"))
             {
                 while (reader.Read())
                 {
                     predictions.Add(new Prediction
                     {
+                        MatchId = (int)reader["MatchId"],
                         UserName = (string)reader["UserName"],
                         HomeTeamPredictedScore = (int)reader["HomeTeamPredictedScore"],
                         AwayTeamPredictedScore = (int)reader["AwayTeamPredictedScore"],
