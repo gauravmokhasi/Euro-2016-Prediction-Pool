@@ -35,6 +35,12 @@ namespace Euro2016.BusinessLogic
             WriteToDb(sqlQuery);
         }
 
+        public static void UpdateScore(Fixture fixture)
+        {
+            string sqlQuery = "UPDATE Fixtures SET HomeTeamScore = " + fixture.HomeTeamScore + ", AwayTeamScore = " + fixture.AwayTeamScore + " WHERE MatchId = " + fixture.MatchId;
+            WriteToDb(sqlQuery);
+        }
+
         public static List<Fixture> GetAllFixtures()
         {
             List<Fixture> fixtures = new List<Fixture>();

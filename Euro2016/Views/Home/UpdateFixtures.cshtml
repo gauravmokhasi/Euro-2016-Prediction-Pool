@@ -1,0 +1,86 @@
+﻿@model List<Euro2016.Models.Fixture>
+
+@{
+    ViewBag.Title = "Fixtures";
+}
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Click on "Update Score" to set the score for the match.</p>
+
+@{
+    if (!Model.Any())
+    {
+        <div class="container">
+            <p class="lead">No fixtures to be displayed at the moment.</p>
+        </div>
+    }
+    else
+    {
+        var grid = new WebGrid(Model, canPage: true, rowsPerPage: 12);
+        @grid.GetHtml(
+      htmlAttributes: new { id = "FixtureTable" },
+      columns: grid.Columns(
+          grid.Column("MatchDate", header: "Match Date"),
+          grid.Column("HomeTeam", header: "Home Team"),
+          grid.Column("HomeTeamScore", header: "Home Team Score"),
+          grid.Column("AwayTeamScore", header: "Away Team Score"),
+          grid.Column("AwayTeam", header: "Away Team"),
+          grid.Column(format: (item) => @Html.ActionLink("Update Score", null, null, new { @class = "btn btn-xs btn-default", href = "#myModal", data_toggle = "modal", data_target = "#myModal", data_matchid = (int)item.MatchId, data_home = item.HomeTeam, data_away = item.AwayTeam }))
+          ),
+       tableStyle: "table table-striped"
+            )
+    }
+}
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Update Scores</h4>
+            </div>
+            <div class="modal-body">
+                @using (@Html.BeginForm("Update", "Home", FormMethod.Post, new { id = "update" }))
+                {
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="matchid" name="MatchId">
+                    </div>
+                    <div class="form-group">
+                        <label for="home" class="control-label" id="homelabel">Home:</label>
+                        <input type="number" max="10" class="form-control" id="home" name="HomeTeamScore">
+                    </div>
+                    <div class="form-group">
+                        <label for="away" class="control-label" id="awaylabel">Away:</label>
+                        <input type="number" max="10" class="form-control" id="away" name="AwayTeamScore">
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="submit">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script>
+        $('#myModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var matchid = button.data('matchid') // Extract info from data-* attributes
+            var home = button.data('home') // Extract info from data-* attributes
+            var away = button.data('away') // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('#homelabel').text(home)
+            modal.find('#awaylabel').text(away)
+            modal.find('#matchid').val(matchid)
+        })
+        $('#submit').click(function () {
+            $('#update').submit();
+        });
+    </script>
+}

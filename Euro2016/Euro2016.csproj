@@ -209,6 +209,7 @@
     <Content Include="Views\Home\Leaderboard.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Predictions.cshtml" />
+    <Content Include="Views\Home\UpdateFixtures.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

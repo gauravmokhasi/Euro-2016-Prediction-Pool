@@ -40,5 +40,19 @@ namespace Euro2016.Controllers
             DbHelper.RecordPredictionReceived(prediction);
             return RedirectToAction("Predictions");
         }
+
+        public ActionResult UpdateFixtures()
+        {
+            ViewBag.Message = "List of fixtures for Euro 2016";
+            List<Fixture> fixtures = DbHelper.GetAllFixtures();
+            return View(fixtures);
+        }
+
+        [HttpPost]
+        public ActionResult Update(Fixture fixture)
+        {
+            DbHelper.UpdateScore(fixture);
+            return RedirectToAction("UpdateFixtures");
+        }
     }
 }
