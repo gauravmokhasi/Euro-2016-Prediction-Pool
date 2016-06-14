@@ -19,8 +19,21 @@ namespace Euro2016.BusinessLogic
                 AddPlayerToPointsTable(prediction.UserName);
             }
 
-            string sqlQuery = "INSERT INTO MatchPredictions(UserName, MatchId, HomeTeamPredictedScore, AwayTeamPredictedScore) VALUES ('" + prediction.UserName + "', " + prediction.MatchId + ", " + prediction.HomeTeamPredictedScore + ", " + prediction.AwayTeamPredictedScore + ")";
+            string sqlQuery = "";
+            if (!CheckPlayerHasPredictionForMatch(prediction)){
+                sqlQuery = "INSERT INTO MatchPredictions(UserName, MatchId, HomeTeamPredictedScore, AwayTeamPredictedScore) VALUES ('" + prediction.UserName + "', " + prediction.MatchId + ", " + prediction.HomeTeamPredictedScore + ", " + prediction.AwayTeamPredictedScore + ")";
+            }
+            else
+            {
+                sqlQuery = "UPDATE MatchPredictions SET HomeTeamPredictedScore = " + prediction.HomeTeamPredictedScore + ", AwayTeamPredictedScore = " + prediction.AwayTeamPredictedScore + " WHERE MatchId = " + prediction.MatchId;
+            }
             WriteToDb(sqlQuery);
+        }
+
+        private static bool CheckPlayerHasPredictionForMatch(Prediction prediction)
+        {
+            List<Prediction> predictions = GetPredictionHistory(prediction.UserName);
+            return predictions.Exists(x => x.MatchId == prediction.MatchId);
         }
 
         private static bool CheckPlayerInPointsTable(string userName)

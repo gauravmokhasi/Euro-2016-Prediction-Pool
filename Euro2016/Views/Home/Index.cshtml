@@ -4,16 +4,18 @@
 
 <div class="jumbotron">
     <h1>Euro 2016 Prediction Pool</h1>
-    <p class="lead">The Euro 2016 Prediction Pool lets you see fixtures and scores, as well as predict scores and compete against your friends in the leaderboard.</p>
-    <p class="btn btn-primary btn-lg">@Html.ActionLink("See fixtures", "Fixtures", "Home")</p>
+    <p class="lead">The Euro 2016 Prediction Pool lets you see fixtures and scores, as well as predict scores and compete against your friends in the leaderboard.
+    To be eligible for the contest, you need to predict a match's outcome the day before it is played.
+    Predicting the correct result is worth 3 points, goal difference is 5, and actual goals for/against is 8 points.
+    </p>
 </div>
 
 <div class="row">
     <div class="col-md-4">
         <h2>Fixtures and Scores</h2>
         <p>
-            See upcoming fixtures and the scores for games that have already been played.
-            Also give your predictions by clicking on the individual match links.
+            See upcoming fixtures and scores for completed games.
+            You can also give your predictions here.
         </p>
         <p class="btn btn-default">@Html.ActionLink("Go to fixtures", "Fixtures", "Home")</p>
     </div>
@@ -30,7 +32,7 @@
         <p>
             See all the scores that you have predicted so far.
         </p>
-        <p class="btn btn-default">@Html.ActionLink("Go to predictions", "Predictions", "Home")</p>
+        <p class="btn btn-default">@Html.ActionLink("Go to prediction history", "Predictions", "Home")</p>
     </div>
     @{
         if (User.Identity.Name.Equals("VISA\\gmokhasi"))
@@ -38,9 +40,9 @@
             <div class="col-md-4">
                 <h2>Admin Panel</h2>
                 <p>
-                    Update scores for fixtures that have been played.
+                    Update scores for fixtures that have been played. Also update leaderboard here.
                 </p>
-                <p class="btn btn-default">@Html.ActionLink("Go update scores", "UpdateFixtures", "Home")</p>
+                <p class="btn btn-default">@Html.ActionLink("Go update", "UpdateFixtures", "Home")</p>
             </div>
         }
     }
