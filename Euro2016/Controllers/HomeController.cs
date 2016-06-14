@@ -43,9 +43,13 @@ namespace Euro2016.Controllers
 
         public ActionResult UpdateFixtures()
         {
-            ViewBag.Message = "List of fixtures for Euro 2016";
-            List<Fixture> fixtures = DbHelper.GetAllFixtures();
-            return View(fixtures);
+            if (@User.Identity.Name.Equals("VISA\\gmokhasi"))
+            {
+                ViewBag.Message = "List of fixtures for Euro 2016";
+                List<Fixture> fixtures = DbHelper.GetAllFixtures();
+                return View(fixtures);
+            }
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
