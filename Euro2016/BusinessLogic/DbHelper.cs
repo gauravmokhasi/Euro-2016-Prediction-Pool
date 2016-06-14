@@ -31,7 +31,7 @@ namespace Euro2016.BusinessLogic
 
         private static void AddPlayerToPointsTable(string userName)
         {
-            string sqlQuery = "INSERT INTO Points(UserName) VALUES (" + userName + ")";
+            string sqlQuery = "INSERT INTO Points(UserName) VALUES ('" + userName + "')";
             WriteToDb(sqlQuery);
         }
 
