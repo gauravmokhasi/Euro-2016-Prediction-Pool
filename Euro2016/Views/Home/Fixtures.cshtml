@@ -26,7 +26,12 @@
           grid.Column("HomeTeamScore", header: "Home Team Score"),
           grid.Column("AwayTeamScore", header: "Away Team Score"),
           grid.Column("AwayTeam", header: "Away Team"),
-          grid.Column(format: (item) => @Html.ActionLink("Predict Score", null, null, new { @class = "btn btn-xs btn-default", href = "#myModal", data_toggle = "modal", data_target = "#myModal", data_matchid = (int)item.MatchId, data_home = item.HomeTeam, data_away = item.AwayTeam }))
+          grid.Column(format: (item) =>
+          {
+              if (item.MatchDate > DateTime.Now)
+                  return @Html.ActionLink("Predict Score", null, null, new { @class = "btn btn-xs btn-default", href = "#myModal", data_toggle = "modal", data_target = "#myModal", data_matchid = (int)item.MatchId, data_home = item.HomeTeam, data_away = item.AwayTeam });
+              return null;
+          })
           ),
        tableStyle: "table table-striped"
             )
