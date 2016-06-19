@@ -7,7 +7,9 @@
     <h2>@ViewBag.Title</h2>
     <h3>@ViewBag.Message</h3>
 
-    <p>Click on "Predict Score" to give your predictions for the match and enter the tournament.</p>
+    <p>Click on "Predict Score" to give your predictions for the match and enter the tournament.
+    You can only predict scores till the day before a fixture is supposed to be played.
+    So scroll through the table to a date, onwards from which, you can predict scores.</p>
 
     @{
         if (!Model.Any())
