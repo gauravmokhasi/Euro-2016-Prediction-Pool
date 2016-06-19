@@ -57,7 +57,7 @@ namespace Euro2016.BusinessLogic
         public static List<Fixture> GetAllFixtures()
         {
             List<Fixture> fixtures = new List<Fixture>();
-            using (IDataReader reader = GetIDataReader("SELECT * FROM Fixtures ORDER BY MatchDate"))
+            using (IDataReader reader = GetIDataReader("SELECT * FROM Fixtures ORDER BY MatchDate DESC"))
             {
                 while (reader.Read())
                 {

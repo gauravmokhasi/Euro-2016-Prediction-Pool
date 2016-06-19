@@ -7,9 +7,10 @@
     <h2>@ViewBag.Title</h2>
     <h3>@ViewBag.Message</h3>
 
-    <p>Click on "Predict Score" to give your predictions for the match and enter the tournament.
-    You can only predict scores till the day before a fixture is supposed to be played.
-    So scroll through the table to a date, onwards from which, you can predict scores.</p>
+    <p>
+        Click on "Predict Score" to give your predictions for the match and enter the tournament.
+        You can only predict scores till the day before a fixture is supposed to be played.
+    </p>
 
     @{
         if (!Model.Any())
@@ -22,10 +23,26 @@
             @grid.GetHtml(
       htmlAttributes: new { id = "FixtureTable" },
       columns: grid.Columns(
-          grid.Column("MatchDate", header: "Match Date"),
+          grid.Column(format: (item) => { return item.MatchDate.ToShortDateString(); }, header: "Match Date"),
           grid.Column("HomeTeam", header: "Home Team"),
-          grid.Column("HomeTeamScore", header: "Home Team Score"),
-          grid.Column("AwayTeamScore", header: "Away Team Score"),
+          grid.Column(format: (item) =>
+          {
+              string score = "";
+              if (item.MatchDate >= DateTime.Now.Date)
+                  score = "-";
+              else
+                  score = "" + item.HomeTeamScore;
+              return score;
+          }, header: "Home Team Score"),
+          grid.Column(format: (item) =>
+          {
+              string score = "";
+              if (item.MatchDate >= DateTime.Now.Date)
+                  score = "-";
+              else
+                  score = "" + item.AwayTeamScore;
+              return score;
+          }, header: "Away Team Score"),
           grid.Column("AwayTeam", header: "Away Team"),
           grid.Column(format: (item) =>
           {
