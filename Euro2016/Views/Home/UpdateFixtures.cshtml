@@ -17,7 +17,7 @@
     }
     else
     {
-        var grid = new WebGrid(Model, canPage: true, rowsPerPage: 12);
+        var grid = new WebGrid(Model);
         @grid.GetHtml(
       htmlAttributes: new { id = "FixtureTable" },
       columns: grid.Columns(
@@ -28,7 +28,8 @@
           grid.Column("AwayTeam", header: "Away Team"),
           grid.Column(format: (item) => @Html.ActionLink("Update Score", null, null, new { @class = "btn btn-xs btn-default", href = "#myModal", data_toggle = "modal", data_target = "#myModal", data_matchid = (int)item.MatchId, data_home = item.HomeTeam, data_away = item.AwayTeam }))
           ),
-       tableStyle: "table table-striped"
+       tableStyle: "table table-striped",
+       mode: WebGridPagerModes.All
             )
     }
 }

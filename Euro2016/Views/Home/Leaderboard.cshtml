@@ -3,31 +3,33 @@
 @{
     ViewBag.Title = "Leaderboard";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<div class="container">
+    <h2>@ViewBag.Title.</h2>
+    <h3>@ViewBag.Message</h3>
 
-<p>Current Leaderboard based on player predictions.<br/>
-    Correct score prediction = 8 points. <br/>
-    Correct score difference (with winner) = 5 points. So every correct draw prediction = 5 points. <br/>
-    Correct winner = 3 points. </p>
+    <p>
+        Correct score prediction = 8 points. <br />
+        Correct score difference (with winner) = 5 points. So every correct draw prediction = 5 points. <br />
+        Correct winner = 3 points.
+    </p>
 
-@{
-    if (!Model.Any())
-    {
-        <div class="container">
+    @{
+        if (!Model.Any())
+        {
             <p class="lead">No players are playing at the moment.</p>
-        </div>
-    }
-    else
-    {
-        var grid = new WebGrid(Model, canPage: true, rowsPerPage: 12);
-        @grid.GetHtml(
+        }
+        else
+        {
+            var grid = new WebGrid(Model);
+            @grid.GetHtml(
       htmlAttributes: new { id = "PointsTable" },
       columns: grid.Columns(
           grid.Column("UserName", header: "User Name"),
           grid.Column("Points")
          ),
-         tableStyle: "table table-striped"
+         tableStyle: "table table-striped",
+       mode: WebGridPagerModes.All
       )
+        }
     }
-}
+</div>

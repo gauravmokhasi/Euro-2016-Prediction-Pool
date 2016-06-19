@@ -3,32 +3,33 @@
 @{
     ViewBag.Title = "Predictions";
 }
-<h2>@ViewBag.Title</h2>
-<h3>@ViewBag.Message</h3>
+<div class="container">
 
-<p>Here, you can see your prediction history.</p>
+    <h2>@ViewBag.Title</h2>
+    <h3>@ViewBag.Message</h3>
 
-@{
-    if (!Model.Any())
-    {
-        <div class="container">
+    <p>Here, you can see your prediction history.</p>
+
+    @{
+        if (!Model.Any())
+        {
             <p class="lead">No predictions made so far.</p>
-        </div>
-    }
-    else
-    {
-        var grid = new WebGrid(Model, canPage: true, rowsPerPage: 12);
-        @grid.GetHtml(
+        }
+        else
+        {
+            var grid = new WebGrid(Model);
+            @grid.GetHtml(
       htmlAttributes: new { id = "PredictionTable" },
       columns: grid.Columns(
           grid.Column("MatchDate", header: "Match Date"),
           grid.Column("HomeTeam", header: "Home Team"),
           grid.Column("HomeTeamPredictedScore", header: "Home Team Predicted Score"),
           grid.Column("AwayTeamPredictedScore", header: "Away Team Predicted Score"),
-          grid.Column("AwayTeam", header: "Away Team")//,
-                                                      //          grid.Column(format: (item) => @Html.ActionLink("Predict Score", "Predict", new { id = (int)item.MatchId }, new { @class = "btn btn-xs btn-default" }))
+          grid.Column("AwayTeam", header: "Away Team")
          ),
-         tableStyle: "table table-striped"
+         tableStyle: "table table-striped",
+       mode: WebGridPagerModes.All
       )
+        }
     }
-}
+</div>

@@ -2,48 +2,140 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>Euro 2016 Prediction Pool</h1>
-    <p class="lead">The Euro 2016 Prediction Pool lets you see fixtures and scores, as well as predict scores and compete against your friends in the leaderboard.
-    To be eligible for the contest, you need to predict a match's outcome the day before it is played.
-    Predicting the correct result is worth 3 points, goal difference is 5, and actual goals for/against is 8 points.
-    </p>
-</div>
+<!-- Carousel
+================================================== -->
+<div id="myCarousel" class="carousel carouse-fade" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img class="first-slide" src="~/Content/" alt="First slide">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Euro 2016 Prediction Pool</h1>
+                    <p>
+                        The Euro 2016 Prediction Pool lets you see fixtures and scores, as well as predict scores and compete against your friends in the leaderboard.
+                        To be eligible for the contest, you need to predict a match's outcome the day before it is played.
+                        Predicting the correct result is worth 3 points, goal difference is 5, and actual goals for/against is 8 points.
+                    </p>
+                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Play Now!</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img class="second-slide" src="~/Content/" alt="Second slide">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Euro 2016 Prediction Pool</h1>
+                    <p>
+                        The Euro 2016 Prediction Pool lets you see fixtures and scores, as well as predict scores and compete against your friends in the leaderboard.
+                        To be eligible for the contest, you need to predict a match's outcome the day before it is played.
+                        Predicting the correct result is worth 3 points, goal difference is 5, and actual goals for/against is 8 points.
+                    </p>
+                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Play Now!</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Euro 2016 Prediction Pool</h1>
+                    <p>
+                        The Euro 2016 Prediction Pool lets you see fixtures and scores, as well as predict scores and compete against your friends in the leaderboard.
+                        To be eligible for the contest, you need to predict a match's outcome the day before it is played.
+                        Predicting the correct result is worth 3 points, goal difference is 5, and actual goals for/against is 8 points.
+                    </p>
+                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Play Now!</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>*@
+</div><!-- /.carousel -->
+<!-- Featurettes
+================================================== -->
+<!-- Wrap the rest of the page in another container to center all the content. -->
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Fixtures and Scores</h2>
-        <p>
-            See upcoming fixtures and scores for completed games.
-            You can also give your predictions here.
-        </p>
-        <p class="btn btn-default">@Html.ActionLink("Go to fixtures", "Fixtures", "Home")</p>
+<div class="container">
+
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">Fixtures. <span class="text-muted">All the matches.</span></h2>
+            <p class="lead">
+                See upcoming fixtures and scores for completed games.
+                You can also give your predictions here.
+            </p>
+            @Html.ActionLink("Go to fixtures", "Fixtures", "Home", null, new { @class = "btn btn-default" })
+        </div>
+        <div class="col-md-5">
+            <img class="featurette-image img-responsive center-block" src="~/Content/logo.png" alt="Generic placeholder image">
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Leaderboard</h2>
-        <p>
-            See how you are faring against your friends and rivals.
-            The leaderboard is updated daily.
-        </p>
-        <p class="btn btn-default">@Html.ActionLink("Go to leaderboard", "Leaderboard", "Home")</p>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7 col-md-push-5">
+            <h2 class="featurette-heading">Leaderboard. <span class="text-muted">Where you stand.</span></h2>
+            <p class="lead">
+                See how you are faring against your friends and rivals.
+                The leaderboard is updated daily.
+            </p>
+            @Html.ActionLink("Go to leaderboard", "Leaderboard", "Home", null, new { @class = "btn btn-default" })
+        </div>
+        <div class="col-md-5 col-md-pull-7">
+            <img class="featurette-image img-responsive center-block" src="~/Content/logo.png" alt="Generic placeholder image">
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Predictions</h2>
-        <p>
-            See all the scores that you have predicted so far.
-        </p>
-        <p class="btn btn-default">@Html.ActionLink("Go to prediction history", "Predictions", "Home")</p>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">Predictions. <span class="text-muted">History.</span></h2>
+            <p class="lead">
+                See all the scores that you have predicted so far.
+            </p>
+            @Html.ActionLink("Go to prediction history", "Predictions", "Home", null, new { @class = "btn btn-default" })
+        </div>
+        <div class="col-md-5">
+            <img class="featurette-image img-responsive center-block" src="~/Content/logo.png" alt="Generic placeholder image">
+        </div>
     </div>
+
     @{
-        if (User.Identity.Name.Equals("VISA\\gmokhasi"))
+        if (User.Identity.Name.Equals(@"VISA\gmokhasi"))
         {
-            <div class="col-md-4">
-                <h2>Admin Panel</h2>
-                <p>
-                    Update scores for fixtures that have been played. Also update leaderboard here.
-                </p>
-                <p class="btn btn-default">@Html.ActionLink("Go update", "UpdateFixtures", "Home")</p>
+            <hr class="featurette-divider">
+
+            <div class="row featurette">
+                <div class="col-md-7">
+                    <h2 class="featurette-heading">Admin Panel. <span class="text-muted">God Mode.</span></h2>
+                    <p class="lead">
+                        Update scores for fixtures that have been played. Also update leaderboard here.
+                    </p>
+                    @Html.ActionLink("Go update", "UpdateFixtures", "Home", null, new { @class = "btn btn-default" })
+                </div>
+                <div class="col-md-5">
+                    <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+                </div>
             </div>
         }
     }
+
+    <hr class="featurette-divider">
+
+    <!-- /END THE FEATURETTES -->
 </div>
