@@ -1,42 +1,57 @@
 ﻿@model List<Euro2016.Models.Fixture>
 
 @{
-    ViewBag.Title = "Fixtures";
+    ViewBag.Title = "Update Scores and Leaderboard";
 }
-<h2>@ViewBag.Title</h2>
-<h3>@ViewBag.Message</h3>
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+    <h3>@ViewBag.Message</h3>
 
-<p>Click on "Update Score" to set the score for the match.</p>
+    <p>Click on "Update Score" to set the score for the match. Click on "Update Leaderboard" to see the new player standings.</p>
 
-@{
-    if (!Model.Any())
-    {
-        <div class="container">
+    @{
+        if (!Model.Any())
+        {
             <p class="lead">No fixtures to be displayed at the moment.</p>
-        </div>
+        }
+        else
+        {
+            var grid = new WebGrid(Model);
+            @grid.GetHtml(
+              htmlAttributes: new { id = "FixtureTable" },
+              columns: grid.Columns(
+                    grid.Column(format: (item) => { return item.MatchDate.ToShortDateString(); }, header: "Match Date", canSort: true),
+                    grid.Column("HomeTeam", header: "Home Team", canSort: false),
+                    grid.Column(format: (item) =>
+                    {
+                        string score = "";
+                        if (item.MatchDate >= DateTime.Now.Date)
+                            score = "-";
+                        else
+                            score = "" + item.HomeTeamScore;
+                        return score;
+                    }, header: "Home Team Score"),
+                    grid.Column(format: (item) =>
+                    {
+                        string score = "";
+                        if (item.MatchDate >= DateTime.Now.Date)
+                            score = "-";
+                        else
+                            score = "" + item.AwayTeamScore;
+                        return score;
+                    }, header: "Away Team Score"),
+                    grid.Column("AwayTeam", header: "Away Team", canSort: false),
+                    grid.Column(format: (item) => @Html.ActionLink("Update Score", null, null, new { @class = "btn btn-xs btn-default", href = "#myModal", data_toggle = "modal", data_target = "#myModal", data_matchid = (int)item.MatchId, data_home = item.HomeTeam, data_away = item.AwayTeam }))
+                    ),
+                    tableStyle: "table table-striped",
+                    mode: WebGridPagerModes.All
+              )
+        }
     }
-    else
-    {
-        var grid = new WebGrid(Model);
-        @grid.GetHtml(
-      htmlAttributes: new { id = "FixtureTable" },
-      columns: grid.Columns(
-          grid.Column("MatchDate", header: "Match Date"),
-          grid.Column("HomeTeam", header: "Home Team"),
-          grid.Column("HomeTeamScore", header: "Home Team Score"),
-          grid.Column("AwayTeamScore", header: "Away Team Score"),
-          grid.Column("AwayTeam", header: "Away Team"),
-          grid.Column(format: (item) => @Html.ActionLink("Update Score", null, null, new { @class = "btn btn-xs btn-default", href = "#myModal", data_toggle = "modal", data_target = "#myModal", data_matchid = (int)item.MatchId, data_home = item.HomeTeam, data_away = item.AwayTeam }))
-          ),
-       tableStyle: "table table-striped",
-       mode: WebGridPagerModes.All
-            )
-    }
-}
-
-<div class="row" align="center">
-    <button type="button" class="btn btn-primary" id="submitLeaderboard">Update Leaderboard</button>
-    @using (@Html.BeginForm("UpdateLeaderboard", "Home", FormMethod.Post, new { id = "updateLeaderboard" })) { }
+    <div class="row" align="center">
+        <button type="button" class="btn btn-primary" id="submitLeaderboard">Update Leaderboard</button>
+        @using (@Html.BeginForm("UpdateLeaderboard", "Home", FormMethod.Post, new { id = "updateLeaderboard" })) { }
+    </div>
 </div>
 
 <!-- Modal -->

@@ -20,16 +20,18 @@
         }
         else
         {
+            int count = 1;
             var grid = new WebGrid(Model);
             @grid.GetHtml(
-      htmlAttributes: new { id = "PointsTable" },
-      columns: grid.Columns(
-          grid.Column("UserName", header: "User Name"),
-          grid.Column("Points")
-         ),
-         tableStyle: "table table-striped",
-       mode: WebGridPagerModes.All
-      )
+              htmlAttributes: new { id = "PointsTable" },
+              columns: grid.Columns(
+                  grid.Column(format: (item) => { return count++; }, header: "Position"),
+                  grid.Column("UserName", header: "User Name", canSort: false),
+                  grid.Column("Points", canSort: false)
+              ),
+              tableStyle: "table table-striped",
+              mode: WebGridPagerModes.All
+            )
         }
     }
 </div>

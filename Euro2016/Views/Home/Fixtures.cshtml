@@ -21,38 +21,38 @@
         {
             var grid = new WebGrid(Model);
             @grid.GetHtml(
-      htmlAttributes: new { id = "FixtureTable" },
-      columns: grid.Columns(
-          grid.Column(format: (item) => { return item.MatchDate.ToShortDateString(); }, header: "Match Date"),
-          grid.Column("HomeTeam", header: "Home Team"),
-          grid.Column(format: (item) =>
-          {
-              string score = "";
-              if (item.MatchDate >= DateTime.Now.Date)
-                  score = "-";
-              else
-                  score = "" + item.HomeTeamScore;
-              return score;
-          }, header: "Home Team Score"),
-          grid.Column(format: (item) =>
-          {
-              string score = "";
-              if (item.MatchDate >= DateTime.Now.Date)
-                  score = "-";
-              else
-                  score = "" + item.AwayTeamScore;
-              return score;
-          }, header: "Away Team Score"),
-          grid.Column("AwayTeam", header: "Away Team"),
-          grid.Column(format: (item) =>
-          {
-              if (item.MatchDate > DateTime.Now)
-                  return @Html.ActionLink("Predict Score", null, null, new { @class = "btn btn-xs btn-default", href = "#myModal", data_toggle = "modal", data_target = "#myModal", data_matchid = (int)item.MatchId, data_home = item.HomeTeam, data_away = item.AwayTeam });
-              return null;
-          })
-          ),
-       tableStyle: "table table-striped",
-       mode: WebGridPagerModes.All
+                htmlAttributes: new { id = "FixtureTable" },
+                columns: grid.Columns(
+                   grid.Column(format: (item) => { return item.MatchDate.ToShortDateString(); }, header: "Match Date", canSort: true),
+                   grid.Column("HomeTeam", header: "Home Team", canSort: false),
+                   grid.Column(format: (item) =>
+                   {
+                       string score = "";
+                       if (item.MatchDate >= DateTime.Now.Date)
+                           score = "-";
+                       else
+                           score = "" + item.HomeTeamScore;
+                       return score;
+                   }, header: "Home Team Score"),
+                   grid.Column(format: (item) =>
+                   {
+                       string score = "";
+                       if (item.MatchDate >= DateTime.Now.Date)
+                           score = "-";
+                       else
+                           score = "" + item.AwayTeamScore;
+                       return score;
+                   }, header: "Away Team Score"),
+                   grid.Column("AwayTeam", header: "Away Team", canSort: false),
+                   grid.Column(format: (item) =>
+                   {
+                       if (item.MatchDate > DateTime.Now)
+                           return @Html.ActionLink("Predict Score", null, null, new { @class = "btn btn-xs btn-default", href = "#myModal", data_toggle = "modal", data_target = "#myModal", data_matchid = (int)item.MatchId, data_home = item.HomeTeam, data_away = item.AwayTeam });
+                       return null;
+                   })
+                ),
+                tableStyle: "table table-striped",
+                mode: WebGridPagerModes.All
             )
         }
     }

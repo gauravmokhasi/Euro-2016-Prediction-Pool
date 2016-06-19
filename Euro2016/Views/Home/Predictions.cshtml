@@ -19,17 +19,17 @@
         {
             var grid = new WebGrid(Model);
             @grid.GetHtml(
-      htmlAttributes: new { id = "PredictionTable" },
-      columns: grid.Columns(
-          grid.Column("MatchDate", header: "Match Date"),
-          grid.Column("HomeTeam", header: "Home Team"),
-          grid.Column("HomeTeamPredictedScore", header: "Home Team Predicted Score"),
-          grid.Column("AwayTeamPredictedScore", header: "Away Team Predicted Score"),
-          grid.Column("AwayTeam", header: "Away Team")
-         ),
-         tableStyle: "table table-striped",
-       mode: WebGridPagerModes.All
-      )
+              htmlAttributes: new { id = "PredictionTable" },
+              columns: grid.Columns(
+                  grid.Column(format: (item) => { return item.MatchDate.ToShortDateString(); }, header: "Match Date"),
+                  grid.Column("HomeTeam", header: "Home Team", canSort: false),
+                  grid.Column("HomeTeamPredictedScore", header: "Home Team Predicted Score", canSort: false),
+                  grid.Column("AwayTeamPredictedScore", header: "Away Team Predicted Score", canSort: false),
+                  grid.Column("AwayTeam", header: "Away Team", canSort: false)
+              ),
+              tableStyle: "table table-striped",
+              mode: WebGridPagerModes.All
+            )
         }
     }
 </div>
