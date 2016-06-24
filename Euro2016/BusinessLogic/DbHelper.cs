@@ -117,12 +117,13 @@ namespace Euro2016.BusinessLogic
         public static List<Player> GetAllPlayers()
         {
             List<Player> players = new List<Player>();
-            using (IDataReader reader = GetIDataReader("SELECT * FROM Points ORDER BY Points DESC"))
+            using (IDataReader reader = GetIDataReader("SELECT ROW_NUMBER() OVER(ORDER BY Points DESC) AS Position, * FROM [Euro2016DB].[dbo].[Points] ORDER BY POINTS DESC"))
             {
                 while (reader.Read())
                 {
                     players.Add(new Player
                     {
+                        Position = (long)reader["Position"],
                         UserName = (string)reader["UserName"],
                         Points = (int)reader["Points"]
                     });

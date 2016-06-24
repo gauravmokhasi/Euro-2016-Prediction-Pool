@@ -20,12 +20,11 @@
         }
         else
         {
-            int count = 1;
             var grid = new WebGrid(Model);
             @grid.GetHtml(
               htmlAttributes: new { id = "PointsTable" },
               columns: grid.Columns(
-                  grid.Column(format: (item) => { return count++; }, header: "Position"),
+                  grid.Column("Position", canSort: false),
                   grid.Column("UserName", header: "User Name", canSort: false),
                   grid.Column("Points", canSort: false)
               ),
