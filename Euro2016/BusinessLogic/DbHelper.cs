@@ -25,7 +25,7 @@ namespace Euro2016.BusinessLogic
             }
             else
             {
-                sqlQuery = "UPDATE MatchPredictions SET HomeTeamPredictedScore = " + prediction.HomeTeamPredictedScore + ", AwayTeamPredictedScore = " + prediction.AwayTeamPredictedScore + " WHERE MatchId = " + prediction.MatchId;
+                sqlQuery = "UPDATE MatchPredictions SET HomeTeamPredictedScore = " + prediction.HomeTeamPredictedScore + ", AwayTeamPredictedScore = " + prediction.AwayTeamPredictedScore + " WHERE MatchId = " + prediction.MatchId + " AND UserName = '" + prediction.UserName + "'";
             }
             WriteToDb(sqlQuery);
         }
